@@ -1,0 +1,3 @@
+[submodule "dotfile_from_mac"]
+	path = dotfile_from_mac
+	url = https://github.com/yogomi/dotfile.git

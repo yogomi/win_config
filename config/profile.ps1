@@ -1,5 +1,4 @@
-﻿
-Import-Module Get-ChildItemColor
+﻿Import-Module Get-ChildItemColor
 
 # Set l and ls alias to use the new Get-ChildItemColor cmdlets
 Set-Alias l Get-ChildItemColor -Option AllScope
@@ -44,3 +43,23 @@ if (! (ps | ? { $_.Name -eq 'ssh-agent'})) {
 
 Import-Module oh-my-posh
 Set-Theme sorin
+
+# We do this for Powershell as Admin Sessions because CMDER_ROOT is not beng set.
+if (! $ENV:CMDER_ROOT ) {
+    if ( $ENV:ConEmuDir ) {
+        $ENV:CMDER_ROOT = resolve-path( $ENV:ConEmuDir + "\..\.." )
+    } else {
+        $ENV:CMDER_ROOT = resolve-path( $PSScriptRoot + "\.." )
+    }
+}
+
+# Remove trailing '\'
+$ENV:CMDER_ROOT = (($ENV:CMDER_ROOT).trimend("\"))
+
+$CmderModulePath = Join-path $PSScriptRoot "psmodules/"
+
+Invoke-CmdScript.ps1 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" "x64"
+$env:path += ";C:/ProgramData/chocolatey/lib/lua53/tools"
+$env:path += ";C:/Strawberry/perl/bin"
+$env:path += ";C:/tools/ruby26/bin"
+$env:path += ";C:\tools\vim81-kaoriya-win64"
