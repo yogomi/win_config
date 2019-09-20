@@ -58,7 +58,9 @@ $ENV:CMDER_ROOT = (($ENV:CMDER_ROOT).trimend("\"))
 
 $CmderModulePath = Join-path $PSScriptRoot "psmodules/"
 
-Invoke-CmdScript.ps1 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" "x64"
+function Import-CCompile {
+  Invoke-CmdScript.ps1 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" "x64"
+}
 $env:path += ";C:/ProgramData/chocolatey/lib/lua53/tools"
 $env:path += ";C:/Strawberry/perl/bin"
 $env:path += ";C:/tools/ruby26/bin"
